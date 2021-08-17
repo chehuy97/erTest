@@ -1,0 +1,13 @@
+.card {
+    height: 110px;
+    margin: 0px 10px 0px 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .card__image {
+        width: 90px;
+        height: 90px;
+        margin: 10px;
+    }
+}
