@@ -1,20 +1,35 @@
-import {defaultArticleState, ArticleAction, ArticlePayload, articleTypes, ActionSuccess, ActionFailure} from "./article.type";
+import {
+  defaultArticleState,
+  ArticleAction,
+  ArticlePayload,
+  articleTypes,
+  Article,
+} from "./article.type";
 
-const articleReducer = (state = defaultArticleState, action: ArticleAction): ArticlePayload => {
+const articleReducer = (
+  state = defaultArticleState,
+  action: ArticleAction<any>
+): ArticlePayload => {
   switch (action.type) {
     case articleTypes.FETCH_ARTICLE_SUCCESS:
-      action = action as ActionSuccess<ArticlePayload>
+      action = action as ArticleAction<Article[]>;
       return {
         ...state,
-        articles: action.payload.articles
+        articles: action.payload,
+      };
+    case articleTypes.FETCH_ARTICLE_DETAIL_SUCCESS:
+      action = action as ArticleAction<Article>
+      return {
+        ...state,
+        articleDetail: action.payload
       }
     case articleTypes.FETCH_ARTICLE_FAILURE:
-      action = action as ActionFailure
-      alert(action.payload.errorMessage)
-      return state  
+      action = action as ArticleAction<string>;
+      alert(action.payload);
+      return state;
     default:
       return state;
   }
 };
 
-export default articleReducer
+export default articleReducer;

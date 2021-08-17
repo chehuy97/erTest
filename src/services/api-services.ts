@@ -5,4 +5,4 @@ const base_url = 'https://5f55a98f39221c00167fb11a.mockapi.io'
 
 export const getListArticles = ():Promise<AxiosResponse<Article[]>> => axios.get(base_url+'/blogs')
 
-export const getActicleDetail = (id:number) => axios.get(base_url+'blogs/'+id)
+export const getActicleDetail = (id:string):Promise<AxiosResponse<Article>> => axios.get(base_url+'/blogs/'+id)

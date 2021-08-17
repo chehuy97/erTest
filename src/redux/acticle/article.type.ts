@@ -1,7 +1,9 @@
 export const articleTypes = {
         FETCH_ARTICLE_START:'FETCH_ARTICLE_START',
         FETCH_ARTICLE_SUCCESS:'FETCH_ARTICLE_SUCCESS',
-        FETCH_ARTICLE_FAILURE:'FETCH_ARTICLE_FAILURE'
+        FETCH_ARTICLE_FAILURE:'FETCH_ARTICLE_FAILURE',
+        FETCH_ARTICLE_DETAIL_START:'FETCH_ARTICLE_DETAIL_START',
+        FETCH_ARTICLE_DETAIL_SUCCESS:'FETCH_ARTICLE_DETAIL_SUCCESS',
 }
 
 export interface Article {
@@ -13,23 +15,22 @@ export interface Article {
 }
 
 export type ArticlePayload = {
-    articles:Article[]
+    articles:Article[],
+    articleDetail:Article
 }
 
 export const defaultArticleState:ArticlePayload = {
-    articles: []
-}
-
-export type ActionSuccess<T> = {
-    type:string,
-    payload: T
-}
-
-export type ActionFailure = {
-    type:string,
-    payload: {
-        errorMessage:string
+    articles: [],
+    articleDetail: {
+        id:'',
+        createdAt:'',
+        image:'',
+        title:'',
+        content: ''
     }
 }
 
-export type ArticleAction = ActionSuccess<ArticlePayload> | ActionFailure
+export type ArticleAction<T> = {
+    type:string,
+    payload: T
+}

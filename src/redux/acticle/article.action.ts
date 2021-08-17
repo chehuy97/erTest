@@ -1,4 +1,4 @@
-import { articleTypes, ActionSuccess, ActionFailure,ArticlePayload, Article } from './article.type'
+import { articleTypes, Article, ArticleAction } from './article.type'
 
 export const fetchArticles = () => {
     return {
@@ -6,20 +6,30 @@ export const fetchArticles = () => {
     }
 }
 
-export const fetchArticlesSuccess = (articles:Article[]):ActionSuccess<ArticlePayload> => {
+export const fetchArticlesSuccess = (articles:Article[]):ArticleAction<Article[]> => {
     return {
         type: articleTypes.FETCH_ARTICLE_SUCCESS,
-        payload:{
-            articles: articles
-        }
+        payload: articles
     }
 }
 
-export const fetchArticleFailure = (msg:string):ActionFailure => {
+export const fetchArticleFailure = (msg:string):ArticleAction<string> => {
     return {
         type: articleTypes.FETCH_ARTICLE_FAILURE,
-        payload: {
-            errorMessage: msg
-        }
+        payload: msg
+    }
+}
+
+export const fetchArticleDetail = (id:string):ArticleAction<string> => {
+    return {
+        type: articleTypes.FETCH_ARTICLE_DETAIL_START,
+        payload: id
+    }
+}
+
+export const fetchArticleDetailSuccess = (articleDetail: Article):ArticleAction<Article> => {
+    return {
+        type: articleTypes.FETCH_ARTICLE_DETAIL_SUCCESS,
+        payload: articleDetail
     }
 }
