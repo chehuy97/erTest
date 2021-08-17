@@ -1,31 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
+import { useDispatch } from "react-redux";
+import { useSelector } from "../../redux/root-reducer";
+import { fetchArticles } from "../../redux/acticle/article.action";
+import ArticleItem from '../../components/article-item/article-item.component'
 
 const Acticle = () => {
-  const render_acticle_colection = () => {
-    return (
-      <li className="media">
-        <img src="..." className="mr-3" alt="..." />
-        <div className="media-body">
-          <h5 className="mt-0 mb-1">List-based media object</h5>
-          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-          scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-          vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-          vulputate fringilla. Donec lacinia congue felis in faucibus.
-        </div>
-      </li>
-    );
-  };
+  const dispatch = useDispatch();
+  const articles = useSelector(state => state.article.articles)
+  const listArticles = articles.map( item => <ArticleItem article={item}/>)
+
+  useEffect(() => {
+    fetchListArticles()
+  },[]);
+
+  const fetchListArticles = async () => {
+    await dispatch(fetchArticles());
+  }
 
   return (
-      <div>
-          <ul className="list-unstyled">
-            {render_acticle_colection()}
-            {render_acticle_colection()}
-            {render_acticle_colection()}
-          </ul>
-      </div>
-  )
+    <div>
+      <ul className="list-unstyled">
+        {listArticles}
+      </ul>
+    </div>
+  );
 };
 
 export default Acticle;
