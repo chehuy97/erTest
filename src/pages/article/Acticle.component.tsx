@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "../../redux/root-reducer";
 import { fetchArticles } from "../../redux/acticle/article.action";
 import ArticleItem from "../../components/article-item/article-item.component";
+import Pagination from '../../components/pagination/pagination.component'
 import "./article.styles.scss";
 
 const Acticle = () => {
@@ -44,13 +45,11 @@ const Acticle = () => {
           value={searchValue}
           onChange={(e) => filterListArticles(e.target.value)}
         />
-        <button
-          className="btn btn-outline-success my-2 my-sm-0"
-          type="button">
-          Search
-        </button>
       </div>
       <ul className="list-unstyled">{listArticles}</ul>
+      {/* <div className="nav">
+        <Pagination articles={articles}/>
+      </div> */}
     </div>
   );
 };
