@@ -9,7 +9,8 @@ export function* fetchArticles(action:ArticleAction<{[key:string]:any}>) {
     const result: AxiosResponse<Article[]> = yield call(getListArticles, action.payload);
     yield put(fetchArticlesSuccess(result.data));
   } catch (err) {
-    yield put(fetchArticleFailure("Cannot load articles from server"));
+    let msg = handleError(err)
+    yield put(fetchArticleFailure(msg));
   }
 }
 
@@ -18,7 +19,8 @@ export function* fetchArticleDetail(action:ArticleAction<string>) {
     const result:AxiosResponse<Article> = yield call(getActicleDetail,action.payload)
     yield put(fetchArticleDetailSuccess(result.data));
   }catch (err) {
-    yield put(fetchArticleFailure("Cannot load articles detail from server"));
+    let msg = handleError(err)
+    yield put(fetchArticleFailure(msg));
   }
 }
 
@@ -35,4 +37,20 @@ export function* articleSagas() {
     call(onArticlesStart),
     call(onArticleDetailStart)
   ]);
+}
+
+function handleError(error:any):string {
+  let status = error.response.status as number
+  let msg = ''
+  switch(status){
+    case 404:
+      msg = 'Data not found'
+      break
+    case 500:
+      msg = 'Server error'
+      break
+    default:
+      msg = 'Cannot load data cause of unknown issue'    
+  }
+  return msg
 }
