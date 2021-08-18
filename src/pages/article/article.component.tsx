@@ -13,22 +13,20 @@ const Acticle = () => {
   const dispatch = useDispatch();
   const articles = useSelector((state) => state.article.articles);
   const [searchValue, setSearchValue] = useState("");
-  const [filterArticles, setFilterArticles] = useState(articles);
   const [sort, setSort] = useState(sortTypes.DEFAULT);
   const listArticles = articles.map((item) => <ArticleItem article={item} />)
-
   const [page, setPage] = useState(1)
   const limit = 10    
 
   useEffect(() => {
     fetchListArticles();
-  }, []);
+  }, [page]);
 
   const fetchListArticles = async () => {
     await dispatch(fetchArticles({page: page, limit: limit}));
   };
 
-  const handleSearchClick = async ()  => {
+  const searchButtonDidTap = async ()  => {
     await dispatch(fetchArticles({page: page, limit: limit, search: searchValue}));
   };
 
@@ -43,7 +41,7 @@ const Acticle = () => {
     }
   };
 
-  const handleSortClick = () => {
+  const sortButtonDidTap = () => {
     let sortType = sortTypes.DEFAULT
     switch (sort) {
       case sortTypes.UP:
@@ -59,6 +57,12 @@ const Acticle = () => {
     setSort(sortType)
   };
 
+  const onPageChange = async (currentPage:number) => {
+    console.log('PAGE CHANGED');
+    setPage(currentPage)
+    fetchListArticles()
+  }
+
   return (
     <div>
       <div className="search">
@@ -70,18 +74,21 @@ const Acticle = () => {
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
         />
-        <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={() => handleSearchClick()}>Search</button>
+        <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={() => searchButtonDidTap()}>Search</button>
       </div>
       <div className="sort">
         <button
           type="button"
           className={sortButtonStyles()}
-          onClick={() => handleSortClick()}
+          onClick={() => sortButtonDidTap()}
         >
           {'Sort '+sort}
         </button>
       </div>
       <ul className="list-unstyled">{listArticles}</ul>
+      <div className="pagination">
+      <Pagination totalItem={51} onPageChange={onPageChange}/>
+      </div>
     </div>
   );
 };
