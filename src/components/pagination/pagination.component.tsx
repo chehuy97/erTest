@@ -1,6 +1,5 @@
+import "bootstrap/dist/css/bootstrap.css";
 import { useEffect, useState } from "react";
-import { useSelector } from "../../redux/root-reducer";
-import "./pagination.styles.scss";
 
 type props = {
   totalItem: number;
@@ -16,21 +15,9 @@ const Pagination = ({ totalItem, onPageChange }: props) => {
     showPageNumber();
   }, [currentPage]);
 
-  const showPageStyles = (value: number) => {
-    if (value == currentPage) {
-      return "page-link page--active";
-    } else {
-      return "page-link";
-    }
-  };
-
 
   const listPagination = range.map((value) => (
-    <li className="page-item" onClick={() => pageDidTap(value)}>
-      <a className={showPageStyles(value)} href="#">
-        {value}
-      </a>
-    </li>
+    <li className={value === currentPage ? "page-item page-abc active" : "page-item page-abc"} onClick={() => pageDidTap(value)}><a className="page-link" href="#">{value}</a></li>
   ));
 
   const leftButtonDidTap = () => {
@@ -81,21 +68,17 @@ const Pagination = ({ totalItem, onPageChange }: props) => {
   };
 
   return (
-    <nav aria-label="Page navigation example">
-      <ul className="pagination">
-        <li className="page-item" onClick={() => leftButtonDidTap()}>
-          <a className="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        {listPagination}
-        <li className="page-item" onClick={() => rightButtonDidTap()}>
-          <a className="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+    <nav aria-label="...">
+  <ul className="pagination">
+    <li className={currentPage === 1 ? "page-item disabled" : "page-item"}>
+      <a className="page-link" href="#" aria-disabled={currentPage === 1 ? "true" : "false"} onClick={() => leftButtonDidTap()}>Previous</a>
+    </li>
+    {listPagination}
+    <li className={currentPage === totalPage ? "page-item disabled" : "page-item"}>
+      <a className="page-link" href="#" aria-disabled={currentPage === totalPage ? "true" : "false"} onClick={() => rightButtonDidTap()}>Next</a>
+    </li>
+  </ul>
+</nav>
   );
 };
 
