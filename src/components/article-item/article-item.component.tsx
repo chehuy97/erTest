@@ -18,7 +18,7 @@ const ArticleItem = ({article}:ArticleProps) => {
 
   return (
     <li className="media card" key={article.id} onClick={() => showArticleDetail()}>
-      <img src={article.image} className="mr-3 card__image" alt="..." />
+      <img src={article.image} className="mr-3 card__image" alt="article" />
       <div className="media-body">
         <h5 className="mt-0 mb-1">{article.title}</h5>
         {article.content}

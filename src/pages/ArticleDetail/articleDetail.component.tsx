@@ -28,7 +28,7 @@ const ArticleDetail = () => {
     <div className="detailContainer">
       <div className="block">
         <p className="block__title">{articleDetail.title}</p>
-        <img src={articleDetail.image} className="block__image"/>
+        <img src={articleDetail.image} className="block__image" alt="article"/>
         <p className="block__content">{articleDetail.content}</p>
       </div>
     </div>
