@@ -69,7 +69,7 @@ const Acticle = () => {
       <Sort onSortchange={onSortchange} />
       <ul className="list-unstyled">{listArticles}</ul>
       <div className="pagination">
-        <Pagination totalItem={51} onPageChange={onPageChange} />
+        <Pagination isFullOfLimit={articles.length == limit ? true : false} onPageChange={onPageChange} />
       </div>
     </div>
   );
