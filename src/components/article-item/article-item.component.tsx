@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.css";
-import { Article } from "../../redux/acticle/article.type";
+import { Article } from "../../redux/article/article.type";
 import { matchPath, useHistory, useRouteMatch } from 'react-router-dom'
 import './article-item.styles.scss'
 import { useEffect } from "react";

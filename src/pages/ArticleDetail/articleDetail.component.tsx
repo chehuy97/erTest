@@ -3,7 +3,7 @@ import { useRouteMatch } from "react-router-dom";
 import "./articleDetail.styles.scss";
 import { useDispatch } from "react-redux";
 import { useSelector } from "../../redux/root-reducer";
-import { fetchArticleDetail } from "../../redux/acticle/article.action";
+import { fetchArticleDetail } from "../../redux/article/article.action";
 
 type routeParams = {
   articleId: string;

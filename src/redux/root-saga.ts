@@ -1,4 +1,4 @@
-import { articleSagas } from './acticle/article.sagas'
+import { articleSagas } from './article/article.sagas'
 import { all, call } from '@redux-saga/core/effects'
 
 export default function* rootSaga() {

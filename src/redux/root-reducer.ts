@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux'
 import { useSelector as useReduxSelector, TypedUseSelectorHook } from 'react-redux'
-import { ArticlePayload } from './acticle/article.type'
-import articleReducer from './acticle/article.reducer'
+import { ArticlePayload } from './article/article.type'
+import articleReducer from './article/article.reducer'
 
 type AppSate = {
     article: ArticlePayload

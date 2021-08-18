@@ -3,6 +3,7 @@ import {
   ArticleAction,
   ArticlePayload,
   articleTypes,
+  sortTypes,
   Article,
 } from "./article.type";
 
@@ -31,7 +32,7 @@ const articleReducer = (
       action = action as ArticleAction<string>;
       return {
         ...state,
-        articles: state.articles.sort((a,b) => action.payload === 'A->Z' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title))
+        articles: state.articles.sort((a,b) => action.payload === sortTypes.UP ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title))
       }  
     default:
       return state;

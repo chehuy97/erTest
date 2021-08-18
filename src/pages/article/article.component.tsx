@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "../../redux/root-reducer";
-import { fetchArticles, sortArticles } from "../../redux/acticle/article.action";
-import { sortTypes } from "../../redux/acticle/article.type";
+import { fetchArticles, sortArticles } from "../../redux/article/article.action";
+import { sortTypes } from "../../redux/article/article.type";
 import ArticleItem from "../../components/article-item/article-item.component";
 import Pagination from "../../components/pagination/pagination.component";
+import Sort from '../../components/sorting/sort.component'
 import "./article.styles.scss";
 
 const Acticle = () => {
@@ -14,25 +15,21 @@ const Acticle = () => {
   const [searchValue, setSearchValue] = useState("");
   const [filterArticles, setFilterArticles] = useState(articles);
   const [sort, setSort] = useState(sortTypes.DEFAULT);
-  const listArticles =
-    searchValue === ""
-      ? articles.map((item) => <ArticleItem article={item} />)
-      : filterArticles.map((item) => <ArticleItem article={item} />);
+  const listArticles = articles.map((item) => <ArticleItem article={item} />)
+
+  const [page, setPage] = useState(1)
+  const limit = 10    
 
   useEffect(() => {
     fetchListArticles();
   }, []);
 
   const fetchListArticles = async () => {
-    await dispatch(fetchArticles());
+    await dispatch(fetchArticles({page: page, limit: limit}));
   };
 
-  const filterListArticles = (value: string) => {
-    setSearchValue(value);
-    let filters = articles.filter(
-      (item) => item.title.includes(value) || item.content.includes(value)
-    );
-    setFilterArticles(filters);
+  const handleSearchClick = async ()  => {
+    await dispatch(fetchArticles({page: page, limit: limit, search: searchValue}));
   };
 
   const sortButtonStyles = () => {
@@ -71,8 +68,9 @@ const Acticle = () => {
           placeholder="Search"
           aria-label="Search"
           value={searchValue}
-          onChange={(e) => filterListArticles(e.target.value)}
+          onChange={(e) => setSearchValue(e.target.value)}
         />
+        <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={() => handleSearchClick()}>Search</button>
       </div>
       <div className="sort">
         <button
@@ -84,9 +82,6 @@ const Acticle = () => {
         </button>
       </div>
       <ul className="list-unstyled">{listArticles}</ul>
-      {/* <div className="nav">
-        <Pagination articles={articles}/>
-      </div> */}
     </div>
   );
 };

@@ -1,8 +1,9 @@
-import { articleTypes, Article, ArticleAction, sortTypes } from './article.type'
+import { articleTypes, Article, ArticleAction } from './article.type'
 
-export const fetchArticles = () => {
+export const fetchArticles = (requestParams:{[key:string]:any}):ArticleAction<{[key:string]:any}> => {
     return {
-        type: articleTypes.FETCH_ARTICLE_START
+        type: articleTypes.FETCH_ARTICLE_START,
+        payload:requestParams
     }
 }
 

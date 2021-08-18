@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { useState } from "react";
-import { Article } from "../../redux/acticle/article.type";
+import { Article } from "../../redux/article/article.type";
 
 type props = {
   articles: Article[],

@@ -9,8 +9,8 @@ export const articleTypes = {
 
 export const sortTypes = {
   DEFAULT: "",
-  UP: "A->Z",
-  DOWN: "Z->A",
+  UP: "A-Z",
+  DOWN: "Z-A",
 };
 
 export interface Article {

@@ -4,9 +4,9 @@ import { getListArticles, getActicleDetail } from "../../services/api-services";
 import { AxiosResponse } from "axios";
 import { fetchArticlesSuccess, fetchArticleFailure, fetchArticleDetailSuccess } from "./article.action";
 
-export function* fetchArticles() {
+export function* fetchArticles(action:ArticleAction<{[key:string]:any}>) {
   try {
-    const result: AxiosResponse<Article[]> = yield call(getListArticles);
+    const result: AxiosResponse<Article[]> = yield call(getListArticles, action.payload);
     yield put(fetchArticlesSuccess(result.data));
   } catch (err) {
     yield put(fetchArticleFailure("Cannot load articles from server"));
