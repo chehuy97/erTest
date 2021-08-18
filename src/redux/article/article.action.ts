@@ -34,10 +34,3 @@ export const fetchArticleDetailSuccess = (articleDetail: Article):ArticleAction<
         payload: articleDetail
     }
 }
-
-export const sortArticles = (sortType:string):ArticleAction<string> => {
-    return {
-        type: articleTypes.SORT_ARTICLES,
-        payload: sortType
-    }
-}

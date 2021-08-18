@@ -24,6 +24,7 @@ const Pagination = ({ totalItem, onPageChange }: props) => {
     }
   };
 
+
   const listPagination = range.map((value) => (
     <li className="page-item" onClick={() => pageDidTap(value)}>
       <a className={showPageStyles(value)} href="#">

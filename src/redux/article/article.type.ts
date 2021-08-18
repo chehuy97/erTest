@@ -4,13 +4,6 @@ export const articleTypes = {
   FETCH_ARTICLE_FAILURE: "FETCH_ARTICLE_FAILURE",
   FETCH_ARTICLE_DETAIL_START: "FETCH_ARTICLE_DETAIL_START",
   FETCH_ARTICLE_DETAIL_SUCCESS: "FETCH_ARTICLE_DETAIL_SUCCESS",
-  SORT_ARTICLES: "SORT_ARTICLES",
-};
-
-export const sortTypes = {
-  DEFAULT: "",
-  UP: "A-Z",
-  DOWN: "Z-A",
 };
 
 export interface Article {
