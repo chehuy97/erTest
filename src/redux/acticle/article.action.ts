@@ -1,4 +1,4 @@
-import { articleTypes, Article, ArticleAction } from './article.type'
+import { articleTypes, Article, ArticleAction, sortTypes } from './article.type'
 
 export const fetchArticles = () => {
     return {
@@ -31,5 +31,12 @@ export const fetchArticleDetailSuccess = (articleDetail: Article):ArticleAction<
     return {
         type: articleTypes.FETCH_ARTICLE_DETAIL_SUCCESS,
         payload: articleDetail
+    }
+}
+
+export const sortArticles = (sortType:string):ArticleAction<string> => {
+    return {
+        type: articleTypes.SORT_ARTICLES,
+        payload: sortType
     }
 }

@@ -27,6 +27,12 @@ const articleReducer = (
       action = action as ArticleAction<string>;
       alert(action.payload);
       return state;
+    case articleTypes.SORT_ARTICLES:
+      action = action as ArticleAction<string>;
+      return {
+        ...state,
+        articles: state.articles.sort((a,b) => action.payload === 'A->Z' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title))
+      }  
     default:
       return state;
   }
